@@ -8,14 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var welcome: String = ""
+    private let api = MusicAPIService()
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text(welcome.isEmpty ? "Loading..." : welcome)
+                .padding()
         }
-        .padding()
+        .task {
+            await loadWelcome()
+        }
+    }
+
+    @MainActor
+    private func loadWelcome() async {
+        do {
+            welcome = try await api.welcomeMessage()
+        } catch {
+            welcome = "Failed: \(error.localizedDescription)"
+        }
     }
 }
 
