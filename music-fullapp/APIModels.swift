@@ -6,10 +6,6 @@
 //
 
 
-struct WelcomeResponse : Codable {
-    let message: String
-}
-
 struct Wrapper : Codable {
     let items: [Song]
 }

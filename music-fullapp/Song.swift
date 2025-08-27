@@ -12,9 +12,9 @@ struct Song: Identifiable, Codable {
     let title: String
     let artist: String
     let album: String
-    let year: Int
+    let year: String
     let genre: String
-    let imageURL: String
+    let imageURL: URL?
     let description: String
     
     enum CodingKeys: String, CodingKey {
